@@ -1,65 +1,11 @@
-# OpenGl_Tutorial
+//
+//  main.cpp
+//  IDLOpenGLEnv
+//
+//  Created by  tbfungeek on 2020/6/17.
+//  Copyright © 2020 tbfungeek. All rights reserved.
+//
 
-## OpenGL 基本概念
-
-## OpenGL 坐标系
-
-## OpenGL 渲染过程
-
-## OpenGL环境搭建
-
-1. 安装GLEW和GLFW库
-
-```
-brew install glew
-brew install glfw3
-```
-
-2. 打开GLAD的在线服务：[http://glad.dav1d.de](http://glad.dav1d.de)
-
-生成对应的源文件和头文件:
-![](./images/image_001.png)
-![](./images/image_002.png)
-
-将两个头文件目录glad和KHR复制到/usr/local/include文件夹中
-
-3. 创建项目
-
-![](./images/image_003.png)
-
-4. 删除下面无用文件
-
-```
-AppDelegate.h
-AppDelegate.m
-ViewController.h
-ViewController.m
-main.h
-```
-
-5. 添加头文件
-
-在Build Setting 的 Header Search Paths中添加
-
-```
-"/usr/local/include"
-"$(inherited)"
-"/usr/local/Cellar/glfw/3.2.1/lib"
-"/usr/local/Cellar/glew/2.2.0/lib"
-```
-
-![](./images/image_004.png)
-
-6. 添加依赖库
-
-![](./images/image_005.png)
-
-其中libglfw和libGLEW动态库是位于/usr/local/lib
-
-7. 添加glad.c文件到项目中
-8. 新建main.cpp文件，使用下面代码进行测试环境是否搭建成功：
-
-```
 #include <stdio.h>
 #include <iostream>
 #include <glad/glad.h>
@@ -72,6 +18,7 @@ int main(int argc, char **argv){
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     //次版本
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+    
     //告诉glfw我们使用的是core_profile 核心模块
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     //向前兼容
@@ -132,27 +79,3 @@ void processInput(GLFWwindow *window) {
     if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
         glfwSetWindowShouldClose(window, true);
 }
-```
-
-如果大家用的是Xcode11这时候可能发现项目可以跑起来了但是运行的时候会报错：
-
-```
-dyld: Library not loaded: /usr/local/opt/glfw/lib/libglfw.3.dylib
-Referenced from: /Users/xxx/Library/Developer/Xcode/DerivedData/exp-dbtmjsotutirjzgmjxwevbhnprqp/Build/Products/Debug/exp
-Reason: no suitable image found. Did find:
-/usr/local/opt/glfw/lib/libglfw.3.dylib: code signature in (/usr/local/opt/glfw/lib/libglfw.3.dylib) not valid for use in process using Library Validation: mapped file has no cdhash, completely unsigned? Code has to be at least ad-hoc signed.
-/usr/local/Cellar/glfw/3.3/lib/libglfw.3.3.dylib: code signature in (/usr/local/Cellar/glfw/3.3/lib/libglfw.3.3.dylib) not valid for use in process using Library Validation: mapped file has no cdhash, completely unsigned? Code has to be at least ad-hoc signed.
-```
-
-如果遇到这种错误大家可以在项目设置中的****Signing & Capabilities****把Headened Runtime 删掉
-
-这里可能大家有许多还是不熟悉，很正常代码部分后面会和大家一起学习，这里先预先给大家介绍下上面提到的一些关键名词：
-
-* glew: [The OpenGL Extension Wrangler Library](http://glew.sourceforge.net/)
-不同的显卡公司，会发布一些只有自家显卡才支持的扩展函数，要想用这些函数，不得不去寻找最新的glext.h,有了GLEW扩展库，就再也不用为找不到函数的接口而烦恼，因为GLEW能自动识别你的平台所支持的全部OpenGL高级扩展函数。glew包含了OpenGL所需的核心
-
-* glfw: [glfw.org](glfw.org) 
-glfw是用来管理窗口，读取输入，处理事件等任务的开源库，OpenGL只是一套控制GPU的规则，并没有对于跨平台窗口显示和事件进行规定，所以需要一个显示显卡渲染的窗口，这就是glfw的作用。
-
-* [GLAD:](https://www.khronos.org/opengl/wiki/OpenGL_Loading_Library)
->An OpenGL Loading Library is a library that loads pointers to OpenGL functions at runtime, core as well as extensions. This is required to access functions from OpenGL versions above 1.1 on most platforms. Extension loading libraries also abstracts away the difference between the loading mechanisms on different platform
