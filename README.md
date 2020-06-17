@@ -156,3 +156,9 @@ glfw是用来管理窗口，读取输入，处理事件等任务的开源库，O
 
 * [GLAD:](https://www.khronos.org/opengl/wiki/OpenGL_Loading_Library)
 >An OpenGL Loading Library is a library that loads pointers to OpenGL functions at runtime, core as well as extensions. This is required to access functions from OpenGL versions above 1.1 on most platforms. Extension loading libraries also abstracts away the difference between the loading mechanisms on different platform
+
+
+## 较好的内容推荐
+
+* [Learn OpenGL CN](https://learnopengl-cn.github.io/)
+
